@@ -16,11 +16,14 @@
     var path = parsedUrl.pathname;
     var trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
+    // Get the HTTP method
+    var method = req.method.toLowerCase();
+
     // Send a response
     res.end("Hello World\n");
 
     // Log the request path
-    console.log('Request recieved on path: ' + trimmedPath);
+    console.log('Request recieved on path: ' + trimmedPath + 'with method: ' + method);
  });
 
  // Start the server, and have it listen at port 3000
