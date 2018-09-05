@@ -22,12 +22,16 @@
     // Get the HTTP method
     var method = req.method.toLowerCase();
 
+    // Get the headers as an object
+    var headers = req.headers;
+
     // Send a response
     res.end("Hello World\n");
 
     // Log the request path
-    console.log('Request recieved on path: ' + trimmedPath + ' with method: ' + method + ' with query string parameters ', queryStringObject );
- });
+    // console.log('Request recieved on path: ' + trimmedPath + ' with method: ' + method + ' with query string parameters ', queryStringObject );
+    console.log("Request recieved with headers ",headers);
+});
 
  // Start the server, and have it listen at port 3000
  server.listen(3000,function(){
