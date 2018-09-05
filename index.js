@@ -16,6 +16,9 @@
     var path = parsedUrl.pathname;
     var trimmedPath = path.replace(/^\/+|\/+$/g,'');
 
+    // Get the query string as an object
+    var queryStringObject = parsedUrl.query;
+
     // Get the HTTP method
     var method = req.method.toLowerCase();
 
@@ -23,7 +26,7 @@
     res.end("Hello World\n");
 
     // Log the request path
-    console.log('Request recieved on path: ' + trimmedPath + 'with method: ' + method);
+    console.log('Request recieved on path: ' + trimmedPath + ' with method: ' + method + ' with query string parameters ', queryStringObject );
  });
 
  // Start the server, and have it listen at port 3000
