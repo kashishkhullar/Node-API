@@ -60,6 +60,7 @@
             var payloadString = JSON.stringify(payload);
             
             // Return the respose
+            res.setHeader('Content-Type','application/json');
             res.writeHead(statusCode);
             res.end(payloadString);
 
