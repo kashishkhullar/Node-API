@@ -4,12 +4,40 @@
 
  // Dependencies
  const http = require('http');
+ const https = require('https');
  const url  = require('url');
  const StringDecoder = require('string_decoder').StringDecoder;
  const config = require('./config');
+ var fs = require('fs');
 
- // The server should respond to all request with a string
- const server = http.createServer(function(req,res){
+ // Instantiate the HTTP serve
+ const httpServer = http.createServer(function(req,res){
+    unifiedServer(req,res);
+ });
+
+ // Start the HTTP server
+ httpServer.listen(config.httpPort,function(){
+     console.log("The server is listenting on port",config.httpPort,"now in",config.envName, "mode");
+ });
+
+ // HTTPS server options
+ var httpsServerOptions = {
+    'key': fs.readFileSync('./https/key.pem'),
+    'cert':fs.readFileSync('./https/cert.pem')
+ };
+
+ // Instantiate the HTTPS serve
+ const httpsServer = https.createServer(httpsServerOptions,function(req,res){
+    unifiedServer(req,res);
+ });
+
+ // Start the HTTP server
+ httpsServer.listen(config.httpsPort,function(){
+     console.log("The server is listenting on port",config.httpsPort,"now in",config.envName, "mode");
+ });
+
+ // All the server logic for both the http and https
+ var unifiedServer = function(req,res){
 
     // Get the URL and parse it
     var parsedUrl = url.parse(req.url,true);
@@ -77,16 +105,10 @@
         // console.log('Request recieved on path: ' + trimmedPath + ' with method: ' + method + ' with query string parameters ', queryStringObject );
         // console.log("Request recieved with payload ",buffer);
     });
-    
-});
 
- // Start the server
- server.listen(config.port,function(){
-     console.log("The server is listenting on port",config.port,"now in",config.envName, "mode");
- });
+ };
 
  // Define the handlers
-
  var handlers = {};
 
  // Sample handler
