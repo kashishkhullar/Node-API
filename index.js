@@ -3,15 +3,15 @@
  */
 
  // Dependencies
- const http = require('http');
- const https = require('https');
- const url  = require('url');
- const StringDecoder = require('string_decoder').StringDecoder;
- const config = require('./config');
+ var http = require('http');
+ var https = require('https');
+ var url  = require('url');
+ var StringDecoder = require('string_decoder').StringDecoder;
+ var config = require('./config');
  var fs = require('fs');
 
  // Instantiate the HTTP serve
- const httpServer = http.createServer(function(req,res){
+ var httpServer = http.createServer(function(req,res){
     unifiedServer(req,res);
  });
 
@@ -27,7 +27,7 @@
  };
 
  // Instantiate the HTTPS serve
- const httpsServer = https.createServer(httpsServerOptions,function(req,res){
+ var httpsServer = https.createServer(httpsServerOptions,function(req,res){
     unifiedServer(req,res);
  });
 
@@ -115,7 +115,7 @@
  handlers.ping = function(data,callback){
      callback(200);
  }
- 
+
  // Not found handler
  handlers.notFound = function(data,callback){
     callback(404);
