@@ -16,6 +16,12 @@
 
      // Start the workers
      workers.init();
+
+     // Rotate logs
+     workers.rotateLogs();
+
+     // Compression loop
+     workers.logRotationLoop();
  }
 
  // Start the app
